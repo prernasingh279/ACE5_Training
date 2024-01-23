@@ -1,0 +1,13 @@
+how to edit this controller method 
+  [HttpGet("{id}")]
+        public async Task<ActionResult<PrernaFlight>> GetPrernaFlight(int id)
+        {
+            var prernaFlight = await _context.PrernaFlights.FindAsync(id);
+
+            if (prernaFlight == null)
+            {
+                return NotFound();
+            }
+
+            return prernaFlight;
+        }

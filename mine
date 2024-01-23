@@ -11,3 +11,23 @@ how to edit this controller method
 
             return prernaFlight;
         }
+
+
+
+
+
+
+[HttpGet]
+public async Task<ActionResult<IEnumerable<PrernaFlight>>> GetPrernaFlights(string source, string destination)
+{
+    var prernaFlights = await _context.PrernaFlights
+        .Where(f => f.Source == source && f.Destination == destination)
+        .ToListAsync();
+
+    if (prernaFlights == null || !prernaFlights.Any())
+    {
+        return NotFound("No flights available for the specified source and destination.");
+    }
+
+    return Ok(prernaFlights);
+}
